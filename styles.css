@@ -288,6 +288,16 @@
 	overflow: auto;
 }
 
+.selection-translator-sidebar-view .selection-translator-panel-body {
+	padding: var(--size-4-3);
+}
+
+.selection-translator-sidebar-empty {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	line-height: 1.5;
+}
+
 .selection-translator-panel-section {
 	margin-bottom: 12px;
 }

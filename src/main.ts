@@ -11,6 +11,7 @@ import {BILINGUAL_VIRTUAL_VIEW_TYPE, BilingualVirtualView} from "./side-by-side/
 import {closeQuickTranslationPanel} from "./ui/quick-translation-panel";
 import {TaskLogManager} from "./ui/task-log-panel";
 import {closeTranslationPanel, rememberTranslationPointerPosition} from "./ui/translation-panel";
+import {TRANSLATION_SIDEBAR_VIEW_TYPE, TranslationSidebarView} from "./ui/translation-sidebar-view";
 import {TranslationCache} from "./translation/cache";
 import {DefaultPromptService, PromptService} from "./translation/prompt-service";
 import {DefaultRequestQueueService, RequestQueueService} from "./translation/request-queue-service";
@@ -53,6 +54,7 @@ export default class TranslationPlugin extends Plugin {
 		this.immersiveManager.register();
 		this.documentTranslationService.register();
 		this.registerView(BILINGUAL_VIRTUAL_VIEW_TYPE, leaf => new BilingualVirtualView(leaf, this));
+		this.registerView(TRANSLATION_SIDEBAR_VIEW_TYPE, leaf => new TranslationSidebarView(leaf, this));
 		registerTranslationCommands(this);
 		registerEditorMenu(this);
 		registerImageContextMenus(this);

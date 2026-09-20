@@ -8,6 +8,7 @@ export function displayResultSettings(tab: TranslationSettingTab, el: HTMLElemen
 
 	tab.subheading(el, tab.t("settings.result.floating.heading"));
 	tab.toggle(el, tab.t("settings.result.showSource.name"), tab.t("settings.result.showSource.desc"), "showSourceText");
+	tab.toggle(el, tab.t("settings.result.sidebarPanel.name"), tab.t("settings.result.sidebarPanel.desc"), "useSidebarResultPanel");
 
 	tab.subheading(el, tab.t("settings.result.reading.heading"));
 	tab.toggle(el, tab.t("settings.result.immersive.name"), tab.t("settings.result.immersive.desc"), "enableImmersiveTranslation");

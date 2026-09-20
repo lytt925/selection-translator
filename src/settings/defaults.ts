@@ -8,6 +8,7 @@ export const DEFAULT_SETTINGS: TranslationPluginSettings = {
 	sourceLanguage: "auto",
 	targetLanguage: "zh-CN",
 	showSourceText: true,
+	useSidebarResultPanel: false,
 	pluginLanguage: "auto",
 
 	currentProvider: "openai",

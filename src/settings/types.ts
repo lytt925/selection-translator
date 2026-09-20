@@ -23,6 +23,7 @@ export interface TranslationPluginSettings {
 	sourceLanguage: string;
 	targetLanguage: string;
 	showSourceText: boolean;
+	useSidebarResultPanel: boolean;
 	pluginLanguage: PluginLanguageSetting;
 
 	currentProvider: TranslationProviderId;
