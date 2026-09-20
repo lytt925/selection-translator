@@ -109,6 +109,7 @@ class TranslationPanel {
 		this.bodyEl = this.rootEl.createDiv({
 			cls: "selection-translator-panel-body",
 		});
+		this.headerEl.addEventListener("pointerdown", this.handlePointerDown);
 		this.registerExternalClick();
 		this.registerKeyboardNavigation();
 	}

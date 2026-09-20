@@ -75,6 +75,8 @@ class QuickTranslationPanel {
 		setIcon(closeButtonEl, "x");
 		closeButtonEl.addEventListener("click", () => this.close());
 
+		this.headerEl.addEventListener("pointerdown", this.handlePointerDown);
+
 		const bodyEl = this.rootEl.createDiv({
 			cls: "selection-translator-quick-panel-body",
 		});
