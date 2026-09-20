@@ -3,6 +3,7 @@ import {DEFAULT_SETTINGS, TranslationPluginSettings, TranslationSettingTab} from
 import {registerTranslationCommands} from "./triggers/commands";
 import {registerEditorMenu} from "./triggers/editor-menu";
 import {registerImageContextMenus} from "./triggers/image-context-menu";
+import {registerPdfContextMenu} from "./triggers/pdf-menu";
 import {registerTranslationRibbon} from "./triggers/ribbon";
 import {DefaultDocumentTranslationService, DocumentTranslationService} from "./document/document-translation-service";
 import {ImmersiveTranslationManager} from "./immersive/manager";
@@ -55,6 +56,7 @@ export default class TranslationPlugin extends Plugin {
 		registerTranslationCommands(this);
 		registerEditorMenu(this);
 		registerImageContextMenus(this);
+		registerPdfContextMenu(this);
 		registerTranslationRibbon(this);
 		this.registerDomEvent(activeDocument, "pointerdown", rememberTranslationPointerPosition);
 		this.addSettingTab(new TranslationSettingTab(this.app, this));
