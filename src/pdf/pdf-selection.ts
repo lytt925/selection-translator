@@ -1,4 +1,5 @@
 import {Notice} from "obsidian";
+import {getActiveMarkdownView} from "../actions/translate-selection";
 import {t} from "../i18n";
 import TranslationPlugin from "../main";
 import {startCommandNotice} from "../ui/command-notice";
@@ -38,6 +39,22 @@ export function getActivePdfSelection(plugin: TranslationPlugin): string {
 	}
 
 	return activeWindow.getSelection()?.toString().trim() ?? "";
+}
+
+/**
+ * Reads the current selection regardless of whether the active view is a
+ * Markdown editor or the PDF viewer. Falls back to an empty string when
+ * neither applies (e.g. focus is on a different view type, or the panel is
+ * opened with nothing selected) — callers already treat that as "no
+ * pre-filled text", the same as before PDF support existed.
+ */
+export function getSelectionAcrossViews(plugin: TranslationPlugin): string {
+	const markdownView = getActiveMarkdownView(plugin);
+	if (markdownView) {
+		return markdownView.editor.getSelection().trim();
+	}
+
+	return getActivePdfSelection(plugin);
 }
 
 /**

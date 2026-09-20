@@ -4,7 +4,7 @@ import {toggleImmersiveTranslation} from "../actions/toggle-immersive-translatio
 import {translateCurrentFile} from "../actions/translate-current-file";
 import {translateCurrentParagraph, translateCurrentParagraphAndInsertBelow} from "../actions/translate-current-paragraph";
 import {getActiveMarkdownView, translateSelection} from "../actions/translate-selection";
-import {getActivePdfSelection, isActivePdfView, translatePdfSelection} from "../pdf/pdf-selection";
+import {getActivePdfSelection, getSelectionAcrossViews, isActivePdfView, translatePdfSelection} from "../pdf/pdf-selection";
 import {showQuickTranslationPanel} from "../ui/quick-translation-panel";
 import {t} from "../i18n";
 
@@ -39,9 +39,8 @@ export function registerTranslationCommands(plugin: TranslationPlugin) {
 		id: "open-quick-translation-panel",
 		name: t(plugin, "command.openQuickPanel"),
 		callback: () => {
-			const markdownView = getActiveMarkdownView(plugin);
 			showQuickTranslationPanel(plugin, {
-				initialText: markdownView?.editor.getSelection().trim() ?? "",
+				initialText: getSelectionAcrossViews(plugin),
 			});
 		},
 	});

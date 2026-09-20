@@ -6,6 +6,7 @@ import {toggleImmersiveTranslation} from "../actions/toggle-immersive-translatio
 import {translateCurrentFile} from "../actions/translate-current-file";
 import {translateCurrentParagraph} from "../actions/translate-current-paragraph";
 import {getActiveMarkdownView, translateSelection} from "../actions/translate-selection";
+import {getActivePdfSelection, getSelectionAcrossViews, isActivePdfView, translatePdfSelection} from "../pdf/pdf-selection";
 import {showQuickTranslationPanel} from "../ui/quick-translation-panel";
 
 export function registerTranslationRibbon(plugin: TranslationPlugin) {
@@ -22,12 +23,17 @@ export function registerTranslationRibbon(plugin: TranslationPlugin) {
 			.onClick(() => {
 				const markdownView = getActiveMarkdownView(plugin);
 
-				if (!markdownView) {
-					new Notice(t(plugin, "notice.openMarkdownSelection"));
+				if (markdownView) {
+					void translateSelection(plugin, markdownView.editor);
 					return;
 				}
 
-				void translateSelection(plugin, markdownView.editor);
+				if (isActivePdfView(plugin)) {
+					void translatePdfSelection(plugin, getActivePdfSelection(plugin));
+					return;
+				}
+
+				new Notice(t(plugin, "notice.openMarkdownSelection"));
 			}));
 
 		menu.addItem(item => item
@@ -48,9 +54,8 @@ export function registerTranslationRibbon(plugin: TranslationPlugin) {
 			.setTitle(t(plugin, "menu.quickPanel"))
 			.setIcon("search")
 			.onClick(() => {
-				const markdownView = getActiveMarkdownView(plugin);
 				showQuickTranslationPanel(plugin, {
-					initialText: markdownView?.editor.getSelection().trim() ?? "",
+					initialText: getSelectionAcrossViews(plugin),
 				});
 			}));
 
